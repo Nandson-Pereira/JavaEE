@@ -31,15 +31,17 @@ public class AdminBooksBean {
 	@Inject
 	private BookDAO bookDAO;
 
+	@Inject
+	private FacesContext facesContext;
+
 	@Transactional
 	public String save() {
 
 		populateBookAuthor();
 		bookDAO.save(product);
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
 		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		facesContext.addMessage(null, new FacesMessage("Livro Salvo com Sucesso!"));
+		facesContext.addMessage(null, new FacesMessage("Livro Salvo com Sucesso!!"));
 
 		return "/livros/lista?faces-redirect=true";
 	}
