@@ -3,6 +3,8 @@ package org.casadocodigo.loja.managedBeans;
 import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import org.casadocodigo.loja.daos.AuthorDAO;
@@ -30,18 +32,16 @@ public class AdminBooksBean {
 	private BookDAO bookDAO;
 
 	@Transactional
-	public  String save() {
+	public String save() {
 
 		populateBookAuthor();
 		bookDAO.save(product);
-		clearObjects();
-		
-		return "/livros/lista?faces-redirect=true";
-	}
 
-	private void clearObjects() {
-		this.product = new Book();
-		this.selectedAuthorsIds.clear();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.getExternalContext().getFlash().setKeepMessages(true);
+		facesContext.addMessage(null, new FacesMessage("Livro Salvo com Sucesso!"));
+
+		return "/livros/lista?faces-redirect=true";
 	}
 
 	public Book getProduct() {
