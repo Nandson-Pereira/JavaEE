@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import org.casadocodigo.loja.daos.AuthorDAO;
 import org.casadocodigo.loja.daos.BookDAO;
+import org.casadocodigo.loja.infra.MessagesHelper;
 import org.casadocodigo.loja.model.Author;
 import org.casadocodigo.loja.model.Book;
 
@@ -32,7 +32,7 @@ public class AdminBooksBean {
 	private BookDAO bookDAO;
 
 	@Inject
-	private FacesContext facesContext;
+	private MessagesHelper messagesHelper;
 
 	@Transactional
 	public String save() {
@@ -40,8 +40,7 @@ public class AdminBooksBean {
 		populateBookAuthor();
 		bookDAO.save(product);
 
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		facesContext.addMessage(null, new FacesMessage("Livro Salvo com Sucesso!!"));
+		messagesHelper.addFlash(new FacesMessage("Livro Salvo com Sucesso!!!!"));
 
 		return "/livros/lista?faces-redirect=true";
 	}
