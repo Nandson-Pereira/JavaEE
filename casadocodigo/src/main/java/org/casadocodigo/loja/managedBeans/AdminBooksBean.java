@@ -34,7 +34,13 @@ public class AdminBooksBean {
 
 		populateBookAuthor();
 		bookDAO.save(product);
+		clearObjects();
 
+	}
+
+	private void clearObjects() {
+		this.product = new Book();
+		this.selectedAuthorsIds.clear();
 	}
 
 	public Book getProduct() {
@@ -47,8 +53,6 @@ public class AdminBooksBean {
 	}
 
 	private void populateBookAuthor() {
-		//Essa linha imprime => [3, 1, 2]=====
-		System.out.println(selectedAuthorsIds+"=====");
 		selectedAuthorsIds.stream().map((id) -> {
 			return new Author(id);
 		}).forEach(product::add);
