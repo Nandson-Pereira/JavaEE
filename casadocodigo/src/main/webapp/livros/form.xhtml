@@ -5,33 +5,33 @@
 
 <h:body>
 <h:messages />
-	<h:form>
+	<h:form prependId="false">
 		<div>
 			<h:outputLabel>Titulo</h:outputLabel>
-			<h:inputText value="#{adminBooksBean.product.title}" required="true" />
+			<h:inputText value="#{adminBooksBean.product.title}" required="true" id="Titulo" />
 		</div>
 		<div>
 			<h:outputLabel>Descricao</h:outputLabel>
 			<h:inputTextarea cols="20" rows="10"
-				value="#{adminBooksBean.product.description}" required="true" />
+				value="#{adminBooksBean.product.description}" required="true" id="Descricao" />
 		</div>
 		<div>
 			<h:outputLabel>Numero de paginas</h:outputLabel>
 			<h:inputText value="#{adminBooksBean.product.numberOfPages}"
-				required="true">
+				required="true" id="Numero_de_Paginas">
 				<f:validateLongRange minimum="10" />
 			</h:inputText>
 		</div>
 		<div>
 			<h:outputLabel>Preco</h:outputLabel>
-			<h:inputText value="#{adminBooksBean.product.price}" required="true">
+			<h:inputText value="#{adminBooksBean.product.price}" required="true" id="Preco">
 				<f:validateDoubleRange minimum="0.01" maximum="1000000" />
 			</h:inputText>
 		</div>
 		<div>
 			<h:outputLabel>Autores</h:outputLabel>
 			<h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}"
-				converter="javax.faces.Integer" required="true">
+				converter="javax.faces.Integer" required="true" id="Autores">
 				<f:selectItems value="#{adminBooksBean.authors}" var="author"
 					itemLabel="#{author.name}" itemValue="#{author.id}" />
 			</h:selectManyListbox>
